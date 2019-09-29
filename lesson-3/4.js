@@ -30,8 +30,8 @@ function extractCurrencyValue(arg) {
         return;
     }
 
-    let string = arg;
-    let val = parseFloat(string.slice(1));
+    const string = arg;
+    const val = parseFloat(string.slice(1));
 
 
     if(val < 0){

@@ -25,8 +25,8 @@ function checkSpam(source, example) {
         return;
     }
 
-    let src = source.toLowerCase();;
-    let exmp = example.toLowerCase();
+    const src = source.toLowerCase();;
+    const exmp = example.toLowerCase();
 
     if(src.includes(exmp)){
     	console.log(true);

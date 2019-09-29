@@ -30,8 +30,8 @@ function truncate(string, maxLength) {
         return;
     }
 
-    let str = string;
-    let max = maxLength;
+    const str = string;
+    const max = maxLength;
 
     if (max === 0 || max < 0 || str.length < max) {
         console.log(`Something wrong`);

@@ -18,7 +18,7 @@ upperCaseFirst(`string`); //''
 
 
 function upperCaseFirst(str) {
-    let string = str;
+    const string = str;
 
     if (typeof string !== 'string') {
         console.log('It isn\'t a string!');
