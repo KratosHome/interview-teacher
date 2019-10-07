@@ -18,20 +18,28 @@
 // Решение
 
 function f(arg) {
-	if(Array.isArray(arg) !== true){
-		return console.log(new Error('Argument isn\'t an array'))
-	}
+    if (Array.isArray(arg) !== true) {
+        return console.log(new Error('Argument isn\'t an array'))
+    }
 
-	if(arg.length === 0){
-		return console.log(new Error('Argument is empty'))
-	}
+    if (arg.length === 0) {
+        return console.log(new Error('Argument is empty'))
+    }
 
-	
+    const arr = arg;
 
+    if (arr.length === 0) {
+        return;
+    } else {
+        const removed = arr.splice(0, 1);
+        console.log(removed[0]);
+        return f(arr);
+
+    }
 
 }
 
-f([1, 2, 3]);
+f([1, 2, 3, 4, 5, 8]);
 f('[1, 2, 3]');
 f([]);
 
