@@ -1,26 +1,25 @@
 /**
- * Задача 3.
+ * Задача 4.
  *
- * Вручную создать имплементацию функции `every`.
+ * Вручную создать имплементацию функции `some`.
  * Логика работы ручной имплементации должна быть такой-же,
  * как и у встроенного метода.
  *
  * Заметки:
- * - Встроенный метод Array.prototype.every использовать запрещено.
- *
+ * - Встроенный метод Array.prototype.some использовать запрещено.
+ * 
  * Генерировать ошибки, если:
  * - В качестве первого аргумента был передан не массив;
  * - В качестве второго аргумента была передана не функция.
  *
  * Заметки:
- * - Второй аргумент встроенного метода every (thisArg) имплементировать не нужно.
+ * - Второй аргумент встроенного метода some (thisArg) имплементировать не нужно.
  */
 
-const array = [1, 2, 3, 4, 5, 6];
+const array = [1, 2, 'Добро пожаловать.', 4, 5, 6];
 
 // Решение
-
-function every(arr, func) {
+function some(arr, func) {
 
     if (!Array.isArray(arr)) {
         throw new Error("Your first argument is not array")
@@ -32,26 +31,25 @@ function every(arr, func) {
 
     let result = new Boolean();
 
+
     for (let i = 0; i < arr.length; i++) {
-        if (everyFunction(arr[i], i, arr)) {
-            result = true;
+        if (someFunction(arr[i], i, arr)) {
+            return true;
         } else {
-            return false;
+            result = false;
         }
     }
 
-    return result
+    return result;
 
 }
 
-function everyFunction(element, index, arrayRef) {
-    return typeof element === 'number';
+function someFunction(element, index, arrayRef) {
+    return typeof element === 'string';
 }
 
-const result = every(array, everyFunction);
+const result = some(array, someFunction);
 
 console.log(result); // true
 
-
-
-// exports.every = every;
+// exports.some = some;
