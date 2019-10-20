@@ -15,31 +15,37 @@
  * Заметки:
  * - Второй аргумент встроенного метода filter (thisArg) имплементировать не нужно.
  */
-'use strickt';
+
 const array = ['Доброе утро!', 'Добрый вечер!', 3, 512, '#', 'До свидания!'];
 
 // Решение
 
-
 function filter(arr, func) {
-
-    if (!Array.isArray(arr) || typeof func !== 'function') {
-        throw new Error("Some of your argument is not correct")
+    if (!Array.isArray(arr)) {
+        throw new Error("Your first argument is not array")
     }
+
+    if (typeof func !== 'function') {
+        throw new Error("Your second argument is not a function")
+    }
+
+    const transArr = [];
 
     for (let i = 0; i < arr.length; i++) {
-        filterFunction(arr[i], i, arr);        
+        if(filterMethod(arr[i], i, arr)){
+        	transArr.push(arr[i]);
+        }
     }
+    
+    return transArr;
 }
 
-function filterFunction(element, index, arrayRef) {
-  //  console.log(`${index}:`, element, arrayRef);
-
+function filterMethod(element, index, arrayRef) {
     return element === 'Добрый вечер!';
 }
 
-const filteredArray = filter(array, filterFunction);
-console.log(array.filter(filterFunction));
+const filteredArray = filter(array, filterMethod);
 
+console.log(filteredArray); // ['Добрый вечер!']
 
 exports.filter = filter;

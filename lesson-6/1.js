@@ -22,8 +22,12 @@ const array = [1, 2, 3, 4, 5, 6];
 
 
 function forEach(arr, func) {
-    if (!Array.isArray(arr) || typeof func !== 'function') {
-        throw new Error("Some of your argument is not correct")
+    if (!Array.isArray(arr)) {
+        throw new Error("Your first argument is not array")
+    }
+
+    if (typeof func !== 'function') {
+        throw new Error("Your second argument is not a function")
     }
 
     for (let i = 0; i < arr.length; i++) {
