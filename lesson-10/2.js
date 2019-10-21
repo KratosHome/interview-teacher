@@ -30,7 +30,14 @@ function calculate(first, ...rest) {
 
     for (let key in rest) {
         const func = rest[key];
-        calcVal = func(calcVal);
+
+        if ( !func(calcVal) ) {
+            throw new Error('Function does not return any value');
+        } else {
+            calcVal = func(calcVal);
+
+        }
+
     }
     return calcVal;
 }
@@ -43,10 +50,10 @@ const result = calculate(
         return prevResult + 4;
     },
     prevResult => {
-        return prevResult * 5;
+        return;
     },
     prevResult => {
-        return prevResult + 10;
+        return prevResult * 5;
     },
 );
 
