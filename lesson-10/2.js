@@ -20,7 +20,8 @@
 // Решение
 
 
-function calculate(...arg) {
+function calculate(first, ...rest) {
+
     if (typeof first !== 'function') {
         throw new TypeError('Some of your argument is not a function');
     }
@@ -35,7 +36,6 @@ function calculate(...arg) {
 
     return calcVal;
 
-
 }
 
 const result = calculate(
@@ -48,8 +48,11 @@ const result = calculate(
     prevResult => {
         return prevResult * 5;
     },
+    prevResult => {
+        return prevResult + 10;
+    },
 );
 
 console.log(result); // 55
 
-exports.calculate = calculate;
+// exports.calculate = calculate;
