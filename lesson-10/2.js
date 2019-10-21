@@ -29,14 +29,14 @@ function calculate(first, ...rest) {
 
     let calcVal = first();
 
-    for (let key in rest) {
+    for(let key in rest){
         let func = rest[key];
         calcVal = func(calcVal);
     }
 
     return calcVal;
 
-}
+ }
 
 const result = calculate(
     () => {
@@ -49,7 +49,7 @@ const result = calculate(
         return prevResult * 5;
     },
     prevResult => {
-        return prevResult + 10;
+        return prevResult +10;
     },
 );
 
