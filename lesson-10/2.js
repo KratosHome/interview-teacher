@@ -20,12 +20,23 @@
 // Решение
 
 
-function calculate(...arg) {
+function calculate(first, ...rest) {
 
-	if(typeof arguments !== 'function'){
-		throw new TypeError('Some of your argument is not a function');
-	}
-}
+    if (typeof first !== 'function') {
+        throw new TypeError('Some of your argument is not a function');
+    }
+
+
+    let calcVal = first();
+
+    for(let key in rest){
+        let func = rest[key];
+        calcVal = func(calcVal);
+    }
+
+    return calcVal;
+
+ }
 
 const result = calculate(
     () => {
@@ -37,8 +48,11 @@ const result = calculate(
     prevResult => {
         return prevResult * 5;
     },
+    prevResult => {
+        return prevResult +10;
+    },
 );
 
 console.log(result); // 55
 
-exports.calculate = calculate;
+// exports.calculate = calculate;
