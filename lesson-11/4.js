@@ -28,6 +28,39 @@
 
 // Решение
 
+function isFunction(func){
+	if(typeof func !== 'function'){
+		throw new TypeError('Your argument is not a function');
+	}
+}
+
+function createLogger() {
+
+    let arr = [];
+
+    return {
+        call(func, ...rest) {
+
+        	isFunction(func);
+
+            let result = func(...rest);
+
+		    let newObj = {};
+            newObj.name = func.name;
+        	newObj.in = rest;
+        	newObj.out = result;
+
+        	arr.push(newObj);
+
+            return result;
+
+        },
+        print() {
+            return arr;
+        }
+    }
+}
+
 const returnIdentity = n => n;
 const sum = (a, b) => a + b;
 const returnNothing = () => {};
@@ -35,7 +68,8 @@ const returnNothing = () => {};
 const logger1 = createLogger();
 console.log(logger1.call(returnIdentity, 1)); // 1
 console.log(logger1.call(sum, 1, 2)); // 3
-console.log(logger1.print()); // [ { name: 'returnIdentity', in: [ 1 ], out: 1 }, { name: 'sum', in: [ 1, 2 ], out: 3 } ]
+console.log(logger1.call(returnIdentity, 1)); // 1
+console.log(logger1.print()); // [ { name: 'returnIdentity', in: [ 1 ], out: 1 },   { name: 'sum', in: [ 1, 2 ], out: 3 },  { name: 'returnIdentity', in: [ 1 ], out: 1 } ]
 
 const logger2 = createLogger();
 console.log(logger2.call(sum, 3, 4)); // 7
@@ -44,3 +78,4 @@ console.log(logger2.call(returnNothing)); // undefined
 console.log(logger2.print()); // [ { name: 'sum', in: [ 3, 4 ], out: 7 }, { name: 'returnIdentity', in: [ 9 ], out: 9 }, { name: 'returnNothing', in: [], out: undefined } ]
 
 exports.createLogger = createLogger;
+
