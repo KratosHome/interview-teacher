@@ -26,6 +26,8 @@ function CleanerRobot(
     const ENERGY_CONSUMPTION = 1; /* Расход энергии: 1% батареи на 1 час работы. */
     const CLEANING_SPEED = 10; /* Скорость уборки: 10 квадратных метров в час. */
 
+    let time = 0;
+
 
     const getCleaningTime = () => cleaningSquare / CLEANING_SPEED;
 
@@ -38,6 +40,7 @@ function CleanerRobot(
         const cleaningTime = getCleaningTime();
         let usedEnergy = energy - cleaningTime * ENERGY_CONSUMPTION;
 
+
         if(usedEnergy < 0 ){
         	lowBattery();
         }else{        	
@@ -47,6 +50,8 @@ function CleanerRobot(
 
     this.clean = () => {
         const cleaningTime = getCleaningTime();
+        time = Date.now();
+
 
         console.log(
             `Начинаю процесс уборки. Время уборки: ${cleaningTime} часов.`,
@@ -59,7 +64,11 @@ function CleanerRobot(
 
     this.stop = () => {
         const cleaningTime = getCleaningTime();
-        let usedEnergy = energy - ENERGY_CONSUMPTION * cleaningTime;
+
+        let spentTime = Date.now() - time;
+
+        let usedEnergy = energy - ENERGY_CONSUMPTION * spentTime/1000;
+
         console.log(`Уборка завершена досрочно. Осталось заряда батареи: ${usedEnergy}`);
 
         clearTimeout(timerId);
@@ -75,6 +84,7 @@ cleanerRobot.clean(); /* Начинаю процесс уборки. Время 
 
 setTimeout(() => {
     cleanerRobot.stop();  //Спустя 1 секунду: Уборка завершена досрочно. Осталось заряда батареи: 45.5. 
-}, 1000);
+
+}, 10000);
 
 exports.CleanerRobot = CleanerRobot;
