@@ -19,74 +19,32 @@
  * - возвращаемая методом delay функция должна быть необязательной;
  * - в реализации метода delay(ms) обязательно использовать setTimeout.
  */
-let delay = {
-	delay: () =>{
-		console.log(7);
-	}
-}
 
 
-
-
-Function.prototype.delay = function(val1){
-
-	// setTimeout(() => {
-	// 	let func = this;
-	// 	func();
-
-	// }, val1);
-
-	// console.log(this);
-	// console.log(this());
-
-	let func = this;
-	console.log(func);
-
-
-
-	return function() {
-		func(...arguments);
-	}
-	// this;
-
-	// setTimeout(this, 20);
+Function.prototype.delay = function(time) {
+    const func = this;
+    if(func.length !== 0){
+    	return (...rest) => {
+	    	func(...rest);
+	    }
+    }else{
+    	func()
+    }   
+    
 
 
 };
-
 
 function sayHello() {
     console.log('Hello!');
 }
 
-
-
-sayHello.delay(1000); // Выведет "Hello!" через 1 секунду 
+sayHello.delay(100); // Выведет "Hello!" через 1 секунду 
 
 function sum(a, b) {
     console.log(a + b);
 
-    // return a + b
+    return a + b
 }
 
-sum.delay(1000)(5, 2); // Выведет 7 через 1 секунду. 
-// sum.delay(1000)(1, 2);
-// let sums = sum(2,3);
-
-
-// sums.delay(1000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+sum.delay(100)(5, 2); // Выведет 7 через 1 секунду.
