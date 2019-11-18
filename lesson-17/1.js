@@ -47,8 +47,7 @@ let postpone = (start, end, timeDelay) => {
 
     let iter = 0;
     let step = setTimeout(function count() {
-        console.log(arr[iter]);
-        iter++;
+        console.log(arr[iter++]);
         step = setTimeout(count, timeDelay);
 
         if (iter === arr.length) {
