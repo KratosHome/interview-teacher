@@ -116,6 +116,7 @@ class DB {
     }
 }
 
+c
 function comp(value, query) {
 
     if (typeof query === 'object') {
