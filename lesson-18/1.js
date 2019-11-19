@@ -33,98 +33,88 @@ class DB {
 	#count = null;
 	#map = new Map();
 
-	create(obj){
+    create(obj) {
 
-		if( typeof obj !== 'object'){
-			throw new TypeError('Your argument is not an object')
-		}
+        if (typeof obj !== 'object') {
+            throw new TypeError('Your argument is not an object')
+        }
 
-		let id = [this.#count++].toString();
+        if (typeof obj.name !== 'string' || typeof obj.age !== 'number' || typeof obj.country !== 'string' || typeof obj.salary !== 'number') {
+            throw new TypeError('Object is not valid')
+        }
 
-		// this.#map = new Map();
-		obj.id = id;
-		this.#map.set(id, obj);
+        let id = [this.#count++].toString();
+        this.#map.set(id, obj);
 
-		// console.log(this.#map.size);
+        return id;
+    }
 
-		return id;
+    read(id) {
 
-		
-	}
+        if (!arguments.length) {
+            throw new Error('Id of object does not exist');
+        }
 
-	read(id) {
+        if (typeof id !== 'string') {
+            throw new Error('Invalide type of id')
+        }
 
-		if(!arguments.length){
-			throw new Error('Id of object does not exist');
-		}
+        if (!this.#map.has(id)) {
+            return null
+        }
 
-		if(typeof id !== 'string'){
-			throw new Error('Invalide type of id')
-		}
+        this.#map.get(id).id = id;
 
-		if(!this.#map.has(id)){
-			return null
-		}
+        return this.#map.get(id);
+    }
 
-		return this.#map.get(id)
+    readAll() {
+        if (arguments.length) {
+            throw new Error('Does not need an argument');
+        }
 
+        const arrUsers = [];
 
+        for (let key of this.#map.values()) {
+            arrUsers.push(key);
+        }
 
-		
-	}
+        return arrUsers;
+    }
 
-	readAll(){
-		if(arguments.length){
-			throw new Error('Does not need an argument');
-		}
+    update(id, prop) {
+        for (let key in prop) {
+            this.#map.get(id)[key] = prop[key];
+        }
 
-		const arrUsers = [];
+        return this.#map.get(id);
+    }
 
-		// for( let key of this.#map.values()){
-			// arrUsers.push(key);
-		// }
+    delete(id) {
+        if (!arguments.length) {
+            throw new Error('Id of object does not exist');
+        }
 
-		return arrUsers
-	}
+        if (typeof id !== 'string') {
+            throw new Error('Invalide type of id')
+        }
 
-	// update(){
+        this.#map.delete(id);
+        return true;
 
-	// }
-
-	delete(id){
-		if(!arguments.length){
-			throw new Error('Id of object does not exist');
-		}
-
-		if(typeof id !== 'string'){
-			throw new Error('Invalide type of id')
-		}
-
-		this.#map.delete(id);
-
-		console.log(true);
-
-	}
+    }
 }
 // Проверка
 const db = new DB();
 
 const person = {
-  name: "Pitter", // обязательное поле с типом string
-  age: 21, // обязательное поле с типом number
-  country: "ua", // обязательное поле с типом string
-  salary: 500 // обязательное поле с типом number
-};
-
-const person2 = {
-  name: "Julja", // обязательное поле с типом string
-  age: 20, // обязательное поле с типом number
-  country: "ua", // обязательное поле с типом string
-  salary: 550 // обязательное поле с типом number
+    name: "Pitter", // обязательное поле с типом string
+    age: 21, // обязательное поле с типом number
+    country: "ua", // обязательное поле с типом string
+    salary: 500 // обязательное поле с типом number
 };
 
 const id = db.create(person);
-const id2 = db.create(person2);
 const customers = db.readAll(); // массив пользователей
-// db.update(id, { age: 22 }); // id
+db.update(id, { age: 22, country: "us" }); // id
 db.delete(id); // true
