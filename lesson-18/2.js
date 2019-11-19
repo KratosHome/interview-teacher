@@ -12,7 +12,6 @@
 
 // Решение
 class DB {
-    'use strict';
 
     #count = null;
     #map = new Map();
@@ -100,13 +99,16 @@ class DB {
             console.log(key);            
             
             for (let prop in value) {
-                	arr.push(comp(value[prop], query[prop]));
-                	setArr.add(value);    
-         	
+                if(comp(value[prop], query[prop])){
+                    arr.push(comp(value[prop], query[prop]));
+                    res = value;
+                }
             }
-       		
-       		console.log(arr);                
+            setArr.add(res);
+            console.log(arr);
+       		             
         });
+
 
         
        console.log(setArr);
@@ -116,7 +118,7 @@ class DB {
     }
 }
 
-c
+
 function comp(value, query) {
 
     if (typeof query === 'object') {
@@ -137,8 +139,6 @@ function comp(value, query) {
 
 
 }
-
-
 
 
 

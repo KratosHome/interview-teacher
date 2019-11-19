@@ -86,7 +86,6 @@ class DB {
         for (let key in prop) {
             this.#map.get(id)[key] = prop[key];
         }
-
         return this.#map.get(id);
     }
 
