@@ -34,16 +34,12 @@ function getCustomers(arr1, arr2) {
             }
         });
 
-        for(let key in obj){
-            if(!obj[key].hasOwnProperty(obj2[key])){
-                console.log(obj[key]);
-                console.log(obj2[key]);
-                obj2[key] = obj[key];
-            }
-        }
-
-
-        console.log(obj)
+       Promise.all([...arr1, ...arr2]).then((el) => {
+            console.log(el);
+            el.forEach((elem) => {
+                if()
+            })
+       })
         
     })
 
