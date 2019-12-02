@@ -37,7 +37,7 @@ function getCustomers(arr1, arr2) {
        Promise.all([...arr1, ...arr2]).then((el) => {
             console.log(el);
             el.forEach((elem) => {
-                if()
+                
             })
        })
         
