@@ -15,36 +15,47 @@
 */
 
 // Решение
+function objCompare(id, obj1, obj2) {
+
+    if(obj1 === obj2){
+        return true;
+    }
+
+    let keysObj1 = Object.keys(obj1);
+    let keysObj2 = Object.keys(obj2);
+
+    if (keysObj1.length !== keysObj2.length) {
+        return false;
+    }
+
+    if(obj1 )
+
+    return obj1.id === obj2.id
+}
+
 function getCustomers(arr1, arr2) {
     return new Promise((resolve, reject) => {
 
-        let obj = {};
-        let obj2 = {};
+        let obj = [...arr1, ...arr2];
+        let id ;
+        let needed = obj.filter((el) => {
+            if(el.hasOwnProperty('verified') ) {
 
-        arr1.forEach((el) =>{
-            if(el.hasOwnProperty('verified')) {
-                console.log(el);
-                obj = el;
+                id = el.id;
+
+                return el;
             }
+
         });
 
-        arr2.forEach((el) =>{
-            if(el.hasOwnProperty('verified')) {
-                obj2 = el;
-            }
-        });
-
-       Promise.all([...arr1, ...arr2]).then((el) => {
-            console.log(el);
-            el.forEach((elem) => {
-                
-            })
-       })
-        
+    
+        let final = Object.assign({}, ...arr5);
     })
 
 
 }
+
+
 
 // Пример использования
 
@@ -57,13 +68,16 @@ const customers = [
     {
         id: 'A2',
         name: 'alex'
+    },
+    {
+        id: 'A3',
+        name: 'alex'
     }
 ];
 
 const countries = [
     {
         id: 'A1',
-        verified: true,
         country: 'usa',
     },
     {
