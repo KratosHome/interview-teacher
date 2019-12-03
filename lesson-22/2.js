@@ -15,44 +15,47 @@
 */
 
 // Решение
-function objCompare(id, obj1, obj2) {
 
-    if(obj1 === obj2){
-        return true;
-    }
-
-    let keysObj1 = Object.keys(obj1);
-    let keysObj2 = Object.keys(obj2);
-
-    if (keysObj1.length !== keysObj2.length) {
-        return false;
-    }
-
-    if(obj1 )
-
-    return obj1.id === obj2.id
-}
 
 function getCustomers(arr1, arr2) {
     return new Promise((resolve, reject) => {
+        let ident ;
 
-        let obj = [...arr1, ...arr2];
-        let id ;
-        let needed = obj.filter((el) => {
-            if(el.hasOwnProperty('verified') ) {
+        let obj = {};
+        let needArr1=[];
+        // let needArr2=[];
 
-                id = el.id;
-
-                return el;
+        arr1.forEach((el) =>{
+            console.log(el.id);
+            if(el.hasOwnProperty('verified')) {
+                // console.log(el);
+                needArr1.push(el);
+                ident = el.id
             }
 
+            
         });
 
-    
-        let final = Object.assign({}, ...arr5);
+        arr2.find((elem) => {
+            try{
+                if(elem.id === ident && el.hasOwnProperty('verified')){
+                    needArr1.push(elem)
+                }
+            }catch{
+                if(elem.id === ident){
+                    resolve(`We don't have information about country for this customer: ${elem}`)
+                }
+            }
+            
+
+            
+        });
+
+        console.log(needArr1);
+        resolve(Object.assign({}, ...needArr1))
+
+
     })
-
-
 }
 
 
