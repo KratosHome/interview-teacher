@@ -1,7 +1,6 @@
 {
   "name": "lesson-22",
   "version": "1.0.0",
-  "description": "",
   "main": "1.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -11,5 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "fetch": "^1.1.0"
-  }
+  },
+  "description": ""
 }

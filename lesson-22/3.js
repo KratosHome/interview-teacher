@@ -26,19 +26,24 @@ const url = 'https://lab.lectrum.io/geo/api/countries?size=2';
 
 // Решение
 function send(url) {
-	return new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, reject) => {
+        get(url, (error, meta, body) => {
+            const statusCode = meta.status;
 
-		get(url);
-	})
+            if (statusCode === 200) {
+                const { data } = JSON.parse(body);
+                resolve(data);
 
-	// .then((response) => {
-			
-	//         if (response.status !== 200) {
-	//             reject(`We have error, status code: ${statusCode}`)
-	//         }
-	       
-	//         return data;
-	//     });
+            }
+
+            reject(`We have error, status code: ${statusCode}`)
+
+        });
+
+    });
+    return promise;
+
+
 }
 send(url)
     .then(data => {
