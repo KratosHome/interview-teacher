@@ -1,8 +1,21 @@
 class Transaction {
 
+	#store = new Map();
+	#logs = [];
+
+
+	async dispatch(scan){
+		console.log(scan)
+	}
+
+	async rollback(){
+		console.log('revert changes')
+	}
+
 }
 
-const scenario = [{
+const scenario = [
+	{
         index: 1,
         meta: {
             title: 'Collect backup information.',
