@@ -20,19 +20,51 @@
 **В результате такой код должен работать**:
 */
 
+const get = require('fetch').fetchUrl;
+const url = 'https://lab.lectrum.io/geo/api/countries';
+
+
 class Countries {
 
     constructor(url) {
+
+        if (typeof url !== 'string') {
+            throw new Error('It\` not an api')
+        }
         this.api = url;
     }
 
-    send() {
+    send(size) {
 
+        if (typeof size !== 'number') {
+            throw new Error('it\` is not a valid param')
+        }
+
+        const promise = new Promise((resolve, reject) => {
+            const url = this.api + `?size=${size}`;
+
+            get(url, (error, meta, body) => {
+
+                const statusCode = meta.status;
+
+                if (statusCode === 200) {
+                    const { data } = JSON.parse(body);
+                    resolve(data);
+
+                }
+
+                reject(`We have error, status code: ${statusCode}`)
+
+            });
+
+        });
+
+
+        return promise;
     }
-}
 
-const get = require('fetch').fetchUrl;
-const url = 'https://lab.lectrum.io/geo/api/countries';
+
+}
 
 // Решение
 
@@ -40,7 +72,7 @@ const countries = new Countries(url);
 
 (async () => {
     try {
-        const data = await countries.send(2);
+        const data = await countries.send(3);
         console.log(data); // массив стран
     } catch (error) {
         console.log(error);
