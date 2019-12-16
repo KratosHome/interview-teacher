@@ -66,16 +66,16 @@ class Transaction {
 
 
     async rollback(scen, index) {
-        let reverse = [...this.store].reverse();
-        let reverseStorage = new Map(reverse);
+        const reverse = [...this.store].reverse();
+        const reverseStorage = new Map(reverse);
 
         let current;
 
         try {
             for (let [key] of reverseStorage) {
-                let rollbackScen = current = scen.find((el) => el.index === key);
+                const rollbackScen = current = scen.find((el) => el.index === key);
 
-                let result = await rollbackScen.restore(this.store, this.logs);
+                const result = await rollbackScen.restore(this.store, this.logs);
 
                 this.store.delete(rollbackScen.index);
 
