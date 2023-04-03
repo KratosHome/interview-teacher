@@ -23,6 +23,7 @@
 const get = require('fetch').fetchUrl;
 const url = 'https://lab.lectrum.io/geo/api/countries';
 
+// код вірний -----------------------------
 
 class Countries {
 

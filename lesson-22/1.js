@@ -20,6 +20,10 @@ function isCustomerVerified(person) {
     return new Promise((resolve, reject) => {
 
         if (person.hasOwnProperty('verified')) {
+            /*
+            по умові задачі verified повинен бути true
+            (person.hasOwnProperty('verified') && person.verified === true)
+             */
             resolve(true);
         } else {
             reject('Customer is not verified');

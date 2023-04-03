@@ -19,45 +19,64 @@
 
 function getCustomers(arr1, arr2) {
     return new Promise((resolve, reject) => {
-        let ident ;
+        /*
+            Код має кілька проблем та не відповідає умовам задачі.
+
+
+         */
+        let ident;
 
         let obj = {};
-        let needArr1=[];
+        let needArr1 = [];
         // let needArr2=[];
 
-        arr1.forEach((el) =>{
+        arr1.forEach((el) => {
+            // Відсутність перевірки на наявність властивості verified зі значенням true
             console.log(el.id);
-            if(el.hasOwnProperty('verified')) {
+            if (el.hasOwnProperty('verified')) {
                 // console.log(el);
                 needArr1.push(el);
                 ident = el.id
             }
 
-            
-        });
 
+        });
+        /*
+        Використання Array.prototype.find() некоректно
+        оскільки це не враховує випадки, коли verified встановлено на true
+        краще використати filter або forEach
+
+
+        Використання try-catch некоректне, оскільки воно зайве у даному контексті
+         */
         arr2.find((elem) => {
-            try{
-                if(elem.id === ident && el.hasOwnProperty('verified')){
+            try {
+                if (elem.id === ident && el.hasOwnProperty('verified')) {
                     needArr1.push(elem)
                 }
-            }catch{
-                if(elem.id === ident){
+            } catch {
+                if (elem.id === ident) {
                     resolve(`We don't have information about country for this customer: ${elem}`)
                 }
             }
-            
 
-            
+
         });
 
         console.log(needArr1);
         resolve(Object.assign({}, ...needArr1))
+        /*
+        Об'єкти з масиву needArr1 об'єднуються в один об'єкт з допомогою Object.assign().
+        Замість цього, вам потрібно додавати об'єкти в масив результатів.
+        needArr1 - некоректна назва
+        Видалити лишні console.log
+
+         const result = [];
+         */
 
 
     })
 }
-
 
 
 // Пример использования
